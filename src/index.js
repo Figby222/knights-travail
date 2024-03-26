@@ -1,6 +1,6 @@
 import GameBoard from './modules/game-board.js';
+import Knight from './modules/knight.js';
 
-const myBoard = new GameBoard();
-console.table(myBoard.board);
-console.log(myBoard.checkSquare([0, 0]))
-console.log(myBoard.checkSquare([4, 8]))
+const knight = new Knight([0, 0]);
+
+console.log(knight.moveTo([knight.coordinates], [1, 4]))
