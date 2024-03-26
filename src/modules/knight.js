@@ -71,9 +71,10 @@ Knight.prototype.moveTo = function(start, target) {
     let moves = [];
 
     const recursion = (current, moveCount = 0, currentMoves = []) => {
-        if (myBoard.getSquare(current) == null || currentMoves.includes(current)) {
+        if (currentMoves.includes(current) || myBoard.getSquare(current) == null ) {
             return null;
         }
+        debugger;
 
         currentMoves.push(current);
 
