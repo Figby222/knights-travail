@@ -71,6 +71,9 @@ Knight.prototype.moveTo = function(start, target) {
     let moves = [];
 
     const recursion = (current, moveCount = 0, currentMoves = []) => {
+        if (minMoves && moveCount >= minMoves) {
+            return null;
+        }
         for (const move of currentMoves) {
             if (JSON.stringify(move) == JSON.stringify(current)) {
                 return null;
