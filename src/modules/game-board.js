@@ -15,15 +15,15 @@ GameBoard.prototype.build = function() {
     return boardArr;
 }
 
-GameBoard.prototype.checkSquare = function(coordinates) {
+GameBoard.prototype.getSquare = function(coordinates) {
     const x = coordinates[0];
     const y = coordinates[1];
 
     if (x < 0 || x > 7 || y < 0 || y > 7) {
-        return false;
+        return null;
     }
 
-    return true;
+    return this.board[x][y];
 }
 
 export default GameBoard;
