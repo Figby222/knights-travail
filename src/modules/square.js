@@ -12,4 +12,8 @@ const Square = function(x, y) {
     this.bottomRight = [x+1, y+2];
 }
 
+Square.prototype.getCoords = function() {
+    return [this.x, this.y];
+};
+
 export default Square;
