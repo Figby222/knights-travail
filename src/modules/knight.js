@@ -1,17 +1,17 @@
-import GameBoard from './game-board';
+import GameBoard from './game-board.js';
 const Knight = function(coordinates) {
     this.coordinates = coordinates;
     this.x = coordinates[0];
     this.y = coordinates[1];
 
-    this.topLeft = [x-1, y-2];
-    this.topRight = [x+1, y-2];
-    this.midTopLeft = [x-2, y-1];
-    this.midTopRight = [x+2, y-1];
-    this.midBottomLeft = [x-2, y+1];
-    this.midBottomRight = [x+2, y+1];
-    this.bottomLeft = [x-1, y+2];
-    this.bottomRight = [x+1, y+2];
+    // this.topLeft = [x-1, y-2];
+    // this.topRight = [x+1, y-2];
+    // this.midTopLeft = [x-2, y-1];
+    // this.midTopRight = [x+2, y-1];
+    // this.midBottomLeft = [x-2, y+1];
+    // this.midBottomRight = [x+2, y+1];
+    // this.bottomLeft = [x-1, y+2];
+    // this.bottomRight = [x+1, y+2];
 };
 
 //NOT SURE IF I NEED THESE PROTOTYPE FUNCS YET
@@ -67,7 +67,6 @@ Knight.prototype.getBottomRight = function(coordinates) {
 
 Knight.prototype.moveTo = function(start, target) {
     const myBoard = new GameBoard();
-    let current = start;
     let minMoves;
     let moves = [];
 
@@ -100,6 +99,10 @@ Knight.prototype.moveTo = function(start, target) {
 
 
     }
+
+    recursion(start)
+
+    return moves;
 }
 
 export default Knight;
