@@ -1,3 +1,4 @@
+import GameBoard from './game-board';
 const Knight = function(coordinates) {
     this.coordinates = coordinates;
     this.x = coordinates[0];
@@ -63,3 +64,10 @@ Knight.prototype.getBottomRight = function(coordinates) {
 
     return [x+1, y+2]
 };
+
+Knight.prototype.moveTo = function(start, target) {
+    const myBoard = new GameBoard();
+    const board = myBoard.board;
+}
+
+export default Knight;
