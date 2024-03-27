@@ -68,29 +68,32 @@ Knight.prototype.getBottomRight = function(coordinates) {
 Knight.prototype.moveTo = function(start, target) {
     const myBoard = new GameBoard();
     let moves = [];
+    debugger;
 
     const recursion = (current, currentMoves = []) => {
         // IS IN THE EXE CONTEXT OF MOVE
-        currentMoves.push(current);
-        if (JSON.stringify(current) === JSON.stringify(target)) {
-                // MAYBE RETURN MINMOVES & COMPARE topLeft, topRight, ETC.
-                return currentMoves;
+        
+        if (myBoard.getSquare(current) == null) {
+            return [];
         }
 
         if (currentMoves.length >= moves.length && moves.length > 0) {
             return [];
         }
+
         for (const move of currentMoves) {
             if (JSON.stringify(move) == JSON.stringify(current)) {
                 return [];
             }
         }
-
-        if (myBoard.getSquare(current) == null) {
-            return [];
-        }
         
-
+        
+        currentMoves.push(current);
+        
+        if (JSON.stringify(current) === JSON.stringify(target)) {
+            // MAYBE RETURN MINMOVES & COMPARE topLeft, topRight, ETC.
+            return currentMoves;
+        }
         let bestMoves = [];
         let nextMoves;
 
@@ -99,36 +102,47 @@ Knight.prototype.moveTo = function(start, target) {
             bestMoves = nextMoves;
         }
         nextMoves = recursion(this.getTopRight(current), currentMoves);
+
         if (bestMoves.length <= 0 || nextMoves.length < bestMoves.length) {
             bestMoves = nextMoves;
         }
 
         nextMoves = recursion(this.getMidTopLeft(current), currentMoves);
+
         if (bestMoves.length <= 0 || nextMoves.length < bestMoves.length) {
             bestMoves = nextMoves;
         }
         nextMoves = recursion(this.getMidTopRight(current), currentMoves);
+
         if (bestMoves.length <= 0 || nextMoves.length < bestMoves.length) {
             bestMoves = nextMoves;
         }
 
         nextMoves = recursion(this.getMidBottomLeft(current), currentMoves);
+
         if (bestMoves.length <= 0 || nextMoves.length < bestMoves.length) {
             bestMoves = nextMoves;
         }
         nextMoves = recursion(this.getMidBottomRight(current), currentMoves);
+        debugger;
+
         if (bestMoves.length <= 0 || nextMoves.length < bestMoves.length) {
             bestMoves = nextMoves;
         }
 
         nextMoves = recursion(this.getBottomLeft(current), currentMoves);
+
         if (bestMoves.length <= 0 || bestMoves.length < bestMoves.length) {
             bestMoves = nextMoves;
         }
         nextMoves = recursion(this.getBottomRight(current), currentMoves);
+        debugger;
+
         if (bestMoves.length <= 0 || nextMoves.length < bestMoves.length) {
             bestMoves = nextMoves;
         }
+        moves = bestMoves;
+        debugger;
 
         return bestMoves
 
