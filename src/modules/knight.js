@@ -108,7 +108,11 @@ Knight.prototype.moveTo = function(start, target) {
         }
         pastFourth++;
 
+        console.log(current);
         recursion(this.getTopLeft(current), currentMoves);
+        if (JSON.stringify(current) == JSON.stringify(start)) {
+            console.log(`Past getTopLeft: ${current}`);
+        }
         recursion(this.getTopRight(current), currentMoves);
 
         recursion(this.getMidTopLeft(current), currentMoves);
@@ -117,6 +121,7 @@ Knight.prototype.moveTo = function(start, target) {
         recursion(this.getMidBottomLeft(current), currentMoves);
         recursion(this.getMidBottomRight(current), currentMoves);
         recursion(this.getBottomLeft(current), currentMoves);
+        console.log("should be correct: ", current);
         recursion(this.getBottomRight(current), currentMoves);
         // console.log(moves);
 
