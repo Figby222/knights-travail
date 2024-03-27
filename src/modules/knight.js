@@ -71,6 +71,7 @@ Knight.prototype.moveTo = function(start, target) {
     let moves = [];
 
     const recursion = (current, moveCount = 0, currentMoves = []) => {
+        // IS IN THE EXE CONTEXT OF MOVES
         if (minMoves && moveCount >= minMoves) {
             return null;
         }
@@ -87,8 +88,11 @@ Knight.prototype.moveTo = function(start, target) {
 
         currentMoves.push(current);
 
-        if (current === target) {
+        if (JSON.stringify(current) === JSON.stringify(target)) {
+            debugger;
             if (moveCount < minMoves || !(minMoves)) {
+                // MAYBE RETURN MINMOVES & COMPARE topLeft, topRight, ETC.
+                debugger;
                 minMoves = moveCount;
                 moves = currentMoves;
             }
