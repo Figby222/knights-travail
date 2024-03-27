@@ -67,39 +67,46 @@ Knight.prototype.getBottomRight = function(coordinates) {
 
 Knight.prototype.moveTo = function(start, target) {
     const myBoard = new GameBoard();
-    let i = 0;
+    let pastFirst = 0;
+    let pastSecond = 0;
+    let pastThird = 0;
+    let pastFourth = 0;
+    let madeIt = 0;
     let moves = [];
     debugger;
 
     const recursion = (current, currentMoves = []) => {
-        i++;
         // IS IN THE EXE CONTEXT OF MOVE
         
         if (myBoard.getSquare(current) == null) {
             return;
         }
+        pastFirst++;
 
         if (currentMoves.length >= moves.length && moves.length > 0) {
             return;
         }
+        pastSecond++;
 
         for (const move of currentMoves) {
             if (JSON.stringify(move) == JSON.stringify(current)) {
                 return;
             }
         }
+        pastThird++;
         
         
         currentMoves.push(current);
         
         if (JSON.stringify(current) === JSON.stringify(target)) {
             // MAYBE RETURN MINMOVES & COMPARE topLeft, topRight, ETC.
-            console.log(currentMoves);
+            madeIt++;
             if (moves.length == 0 || currentMoves.length < moves.length) {
                 moves = currentMoves;
             }
             return currentMoves;
         }
+        pastFourth++;
 
         recursion(this.getTopLeft(current), currentMoves);
         recursion(this.getTopRight(current), currentMoves);
@@ -118,7 +125,13 @@ Knight.prototype.moveTo = function(start, target) {
 
     }
     recursion(start);
-    console.log(i);
+    console.log({
+        pastFirst,
+        pastSecond,
+        pastThird,
+        pastFourth,
+        madeIt
+    });
 
     return moves;
 }
