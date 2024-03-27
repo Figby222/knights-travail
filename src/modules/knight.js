@@ -70,25 +70,24 @@ Knight.prototype.moveTo = function(start, target) {
     let moves = [];
 
     const recursion = (current, currentMoves = []) => {
-        // IS IN THE EXE CONTEXT OF MOVES
+        // IS IN THE EXE CONTEXT OF MOVE
+        currentMoves.push(current);
         if (JSON.stringify(current) === JSON.stringify(target)) {
                 // MAYBE RETURN MINMOVES & COMPARE topLeft, topRight, ETC.
                 return currentMoves;
-        } else {
-            return;
         }
 
         if (currentMoves.length >= moves.length && moves.length > 0) {
-            return;
+            return [];
         }
         for (const move of currentMoves) {
             if (JSON.stringify(move) == JSON.stringify(current)) {
-                return;
+                return [];
             }
         }
 
         if (myBoard.getSquare(current) == null) {
-            return;
+            return [];
         }
         
 
