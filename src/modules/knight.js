@@ -99,22 +99,12 @@ Knight.prototype.moveTo = function(start, target) {
         }
         
         pastSecond++;
-        debugger;
         for (const move of currentMoves) {
             if (JSON.stringify(move) == JSON.stringify(currentCoords)) {
                 continue;
             }
         }
         pastThird++;
-        
-        debugger;
-        /*
-        *
-        * ISSUE IS HERE
-        *
-        */
-       // why is this pushing currentCoords to every queue[n][1]
-       console.log(queue);
        currentMoves.push(currentCoords);
        
        if (JSON.stringify(currentCoords) === JSON.stringify(target)) {
@@ -126,7 +116,6 @@ Knight.prototype.moveTo = function(start, target) {
         }
         pastFourth++;
         // BREADTH FIRST
-        console.log(current);
         queue.push([myBoard.getTopLeft(currentCoords), currentMoves]);
         queue.push([myBoard.getTopRight(currentCoords), currentMoves]);
         queue.push([myBoard.getMidTopLeft(currentCoords), currentMoves])
