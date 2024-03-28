@@ -82,10 +82,10 @@ Knight.prototype.moveTo = function(start, target) {
         debugger;
         // IS IN THE EXE CONTEXT OF MOVE
         // console.log(myBoard.board);
-        const current = queue[i];
+        const current = Object.assign([], queue[i])
         //set current to queue[i]
-        const currentCoords = queue[i][0];
-        const currentMoves = queue[i][1];
+        const currentCoords = Object.assign([], current[0]);
+        const currentMoves = Object.assign([], current[1]);
         
         // do i++
         if (currentMoves.length >= minMoves.length && minMoves.length > 0) {
@@ -99,7 +99,7 @@ Knight.prototype.moveTo = function(start, target) {
         }
         
         pastSecond++;
-        
+        debugger;
         for (const move of currentMoves) {
             if (JSON.stringify(move) == JSON.stringify(currentCoords)) {
                 continue;
