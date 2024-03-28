@@ -75,10 +75,11 @@ Knight.prototype.moveTo = function(start, target) {
     let moves = [];
     debugger;
 
-    const recursion = (current, currentMoves = []) => {
+    const recursion = function (current, currentMoves = []) {
         // IS IN THE EXE CONTEXT OF MOVE
-        
-        if (myBoard.getSquare(current) == null) {
+        // console.log(myBoard.board);
+        const currentSquare = myBoard.getSquare(current)
+        if (currentSquare == null) {
             return;
         }
         pastFirst++;
@@ -109,21 +110,21 @@ Knight.prototype.moveTo = function(start, target) {
         pastFourth++;
 
         console.log(current);
-        recursion(this.getTopLeft(current), currentMoves);
+        recursion(myBoard.getTopLeft(current), currentMoves);
         if (JSON.stringify(current) == JSON.stringify(start)) {
             debugger;
             console.log(`Past getTopLeft: ${current}`);
         }
-        recursion(this.getTopRight(current), currentMoves);
+        recursion(myBoard.getTopRight(current), currentMoves);
 
-        recursion(this.getMidTopLeft(current), currentMoves);
-        recursion(this.getMidTopRight(current), currentMoves);
+        recursion(myBoard.getMidTopLeft(current), currentMoves);
+        recursion(myBoard.getMidTopRight(current), currentMoves);
 
-        recursion(this.getMidBottomLeft(current), currentMoves);
-        recursion(this.getMidBottomRight(current), currentMoves);
-        recursion(this.getBottomLeft(current), currentMoves);
+        recursion(myBoard.getMidBottomLeft(current), currentMoves);
+        recursion(myBoard.getMidBottomRight(current), currentMoves);
+        recursion(myBoard.getBottomLeft(current), currentMoves);
         console.log("should be correct: ", current);
-        recursion(this.getBottomRight(current), currentMoves);
+        recursion(myBoard.getBottomRight(current), currentMoves);
         // console.log(moves);
 
         // return bestMoves

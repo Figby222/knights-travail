@@ -30,49 +30,57 @@ GameBoard.prototype.getTopLeft = function (coordinates) {
     const x = coordinates[0];
     const y = coordinates[1];
 
-    return this.getSquare([x-1, y-2])
+    return [x-1, y-2]
+    // return this.getSquare([x-1, y-2])
 };
 GameBoard.prototype.getTopRight = function(coordinates) {
     const x = coordinates[0];
     const y = coordinates[1];
 
-    return this.getSquare([x+1, y-2])
+    return [x+1, y-2];
+    // return this.getSquare([x+1, y-2])
 };
 GameBoard.prototype.getMidTopLeft = function(coordinates) {
     const x = coordinates[0];
     const y = coordinates[1];
 
-    return this.getSquare([x-2, y-1])
+    return [x-2, y-1];
+    // return this.getSquare([x-2, y-1])
 };
 GameBoard.prototype.getMidTopRight = function(coordinates) {
     const x = coordinates[0];
     const y = coordinates[1];
 
-    return this.getSquare([x+2, y-1])
+    return [x+2, y-1];
+    // return this.getSquare([x+2, y-1])
 };
 GameBoard.prototype.getMidBottomLeft = function(coordinates) {
     const x = coordinates[0];
     const y = coordinates[1];
 
-    return this.getSquare([x-2, y+1])
+    return [x-2, y+1]
+    // return this.getSquare([x-2, y+1])
 };
 GameBoard.prototype.getMidBottomRight = function(coordinates) {
     const x = coordinates[0];
     const y = coordinates[1];
 
-    return this.getSquare([x+2, y+1])
+    return [x+2, y+1];
+    // return this.getSquare([x+2, y+1])
 };
 GameBoard.prototype.getBottomLeft = function(coordinates) {
     const x = coordinates[0];
     const y = coordinates[1];
 
     return [x-1, y+2]
+    // return this.getSquare([x-1, y+2]);
 };
 GameBoard.prototype.getBottomRight = function(coordinates) {
     const x = coordinates[0];
     const y = coordinates[1];
 
-    return this.getSquare([x+1, y+2])
+    return [x+1, y+2]
+    // return this.getSquare([x+1, y+2])
 };
 
 export default GameBoard;
