@@ -1,19 +1,19 @@
 import Square from './square.js';
 const GameBoard = function() {
-    this.board = this.build();
+    // this.board = this.build();
 }
 
-GameBoard.prototype.build = function() {
-    let boardArr = [];
+// GameBoard.prototype.build = function() {
+//     let boardArr = [];
 
-    for (let x = 0; x < 8; x++) {
-        boardArr[x] = [];
-        for (let y = 0; y < 8; y++) {
-            boardArr[x].push(new Square(x, y));
-        }
-    }
-    return boardArr;
-}
+//     for (let x = 0; x < 8; x++) {
+//         boardArr[x] = [];
+//         for (let y = 0; y < 8; y++) {
+//             boardArr[x].push(new Square(x, y));
+//         }
+//     }
+//     return boardArr;
+// }
 
 GameBoard.prototype.getSquare = function(coordinates) {
     const x = coordinates[0];
@@ -23,7 +23,7 @@ GameBoard.prototype.getSquare = function(coordinates) {
         return null;
     }
 
-    return this.board[x][y];
+    return true;
 }
 
 GameBoard.prototype.getTopLeft = function (coordinates) {
