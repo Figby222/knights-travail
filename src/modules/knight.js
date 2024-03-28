@@ -83,9 +83,11 @@ Knight.prototype.moveTo = function(start, target) {
         // IS IN THE EXE CONTEXT OF MOVE
         // console.log(myBoard.board);
         const current = queue[0];
-        const currentCoords = current[0];
-        let currentMoves = current[1];
+        //set current to queue[i]
+        const currentCoords = queue[0][0];
+        const currentMoves = queue[0][1];
         
+        // do i++
         queue.shift();
         if (currentMoves.length >= minMoves.length && minMoves.length > 0) {
             continue;
@@ -106,11 +108,17 @@ Knight.prototype.moveTo = function(start, target) {
         }
         pastThird++;
         
-        
+        debugger;
+        /*
+        *
+        * ISSUE IS HERE
+        *
+        */
+        // why is this pushing currentCoords to every queue[n][1]
+        console.log(queue);
         currentMoves.push(currentCoords);
         
         if (JSON.stringify(currentCoords) === JSON.stringify(target)) {
-            // MAYBE RETURN MINMOVES & COMPARE topLeft, topRight, ETC.
             madeIt++;
             if (minMoves.length == 0 || currentMoves.length < minMoves.length) {
                 minMoves = currentMoves;
@@ -128,33 +136,14 @@ Knight.prototype.moveTo = function(start, target) {
         queue.push([myBoard.getMidBottomRight(currentCoords), currentMoves]);
         queue.push([myBoard.getBottomLeft(currentCoords), currentMoves]);
         queue.push([myBoard.getBottomRight(currentCoords), currentMoves]);
-        // recursion(myBoard.getTopLeft(current), currentMoves);
-        // if (JSON.stringify(current) == JSON.stringify(start)) {
-        //     debugger;
-        //     console.log(`Past getTopLeft: ${current}`);
-        // }
-        // recursion(myBoard.getTopRight(current), currentMoves);
-
-        // recursion(myBoard.getMidTopLeft(current), currentMoves);
-        // recursion(myBoard.getMidTopRight(current), currentMoves);
-
-        // recursion(myBoard.getMidBottomLeft(current), currentMoves);
-        // recursion(myBoard.getMidBottomRight(current), currentMoves);
-        // debugger;
-        // recursion(myBoard.getBottomLeft(current), currentMoves);
-        // console.log("should be correct: ", current);
-        // recursion(myBoard.getBottomRight(current), currentMoves);
-        // console.log(moves);
-
-        // return bestMoves
-
     }
     console.log({
         pastFirst,
         pastSecond,
         pastThird,
         pastFourth,
-        madeIt
+        madeIt,
+        queueLength: queue.length
     });
 
     return minMoves;
