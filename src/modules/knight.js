@@ -84,24 +84,24 @@ Knight.prototype.moveTo = function(start, target) {
         // console.log(myBoard.board);
         const current = queue[i];
         //set current to queue[i]
-        // const currentCoords = queue[i][0];
-        // const currentMoves = queue[i][1];
+        const currentCoords = queue[i][0];
+        const currentMoves = queue[i][1];
         
         // do i++
-        if (queue[i][1].length >= minMoves.length && minMoves.length > 0) {
+        if (currentMoves.length >= minMoves.length && minMoves.length > 0) {
             continue;
         }
         pastFirst++;
         
-        const currentSquare = myBoard.getSquare(queue[i][0])
+        const currentSquare = myBoard.getSquare(currentCoords)
         if (currentSquare == null) {
             continue;
         }
         
         pastSecond++;
         
-        for (const move of queue[i][1]) {
-            if (JSON.stringify(move) == JSON.stringify(queue[i][0])) {
+        for (const move of currentMoves) {
+            if (JSON.stringify(move) == JSON.stringify(currentCoords)) {
                 continue;
             }
         }
@@ -113,28 +113,28 @@ Knight.prototype.moveTo = function(start, target) {
         * ISSUE IS HERE
         *
         */
-       // why is this pushing queue[i][0] to every queue[n][1]
+       // why is this pushing currentCoords to every queue[n][1]
        console.log(queue);
-       queue[i][1].push(queue[i][0]);
+       currentMoves.push(currentCoords);
        
-       if (JSON.stringify(queue[i][0]) === JSON.stringify(target)) {
+       if (JSON.stringify(currentCoords) === JSON.stringify(target)) {
            madeIt++;
-           if (minMoves.length == 0 || queue[i][1].length < minMoves.length) {
-               minMoves = queue[i][1];
+           if (minMoves.length == 0 || currentMoves.length < minMoves.length) {
+               minMoves = currentMoves;
             }
             continue;
         }
         pastFourth++;
         // BREADTH FIRST
         console.log(current);
-        queue.push([myBoard.getTopLeft(queue[i][0]), queue[i][1]]);
-        queue.push([myBoard.getTopRight(queue[i][0]), queue[i][1]]);
-        queue.push([myBoard.getMidTopLeft(queue[i][0]), queue[i][1]])
-        queue.push([myBoard.getMidTopRight(queue[i][0]), queue[i][1]]);
-        queue.push([myBoard.getMidBottomLeft(queue[i][0]), queue[i][1]]);
-        queue.push([myBoard.getMidBottomRight(queue[i][0]), queue[i][1]]);
-        queue.push([myBoard.getBottomLeft(queue[i][0]), queue[i][1]]);
-        queue.push([myBoard.getBottomRight(queue[i][0]), queue[i][1]]);
+        queue.push([myBoard.getTopLeft(currentCoords), currentMoves]);
+        queue.push([myBoard.getTopRight(currentCoords), currentMoves]);
+        queue.push([myBoard.getMidTopLeft(currentCoords), currentMoves])
+        queue.push([myBoard.getMidTopRight(currentCoords), currentMoves]);
+        queue.push([myBoard.getMidBottomLeft(currentCoords), currentMoves]);
+        queue.push([myBoard.getMidBottomRight(currentCoords), currentMoves]);
+        queue.push([myBoard.getBottomLeft(currentCoords), currentMoves]);
+        queue.push([myBoard.getBottomRight(currentCoords), currentMoves]);
         i++;
     }
     console.log({
