@@ -78,7 +78,7 @@ Knight.prototype.moveTo = function(start, target) {
     const recursion = function (current, moves = []) {
         // IS IN THE EXE CONTEXT OF MOVE
         // console.log(myBoard.board);
-        let currentMoves = moves.splice();
+        let currentMoves = moves;
         const currentSquare = myBoard.getSquare(current)
         if (currentSquare == null) {
             return;
