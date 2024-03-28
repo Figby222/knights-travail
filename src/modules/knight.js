@@ -111,6 +111,7 @@ Knight.prototype.moveTo = function(start, target) {
         console.log(current);
         recursion(this.getTopLeft(current), currentMoves);
         if (JSON.stringify(current) == JSON.stringify(start)) {
+            debugger;
             console.log(`Past getTopLeft: ${current}`);
         }
         recursion(this.getTopRight(current), currentMoves);
