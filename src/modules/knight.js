@@ -73,66 +73,79 @@ Knight.prototype.moveTo = function(start, target) {
     let pastFourth = 0;
     let madeIt = 0;
     let minMoves = [];
+    let queue = [];
+    queue.push([start, []])
     debugger;
 
-    const recursion = function (current, moves = []) {
+    while (queue.length > 0) {
         // IS IN THE EXE CONTEXT OF MOVE
         // console.log(myBoard.board);
-        let currentMoves = moves;
-        const currentSquare = myBoard.getSquare(current)
+        const current = queue[0];
+        const currentCoords = current[0];
+        let currentMoves = current[1];
+
+        queue.unshift();
+        const currentSquare = myBoard.getSquare(currentCoords)
         if (currentSquare == null) {
-            return;
+            continue;
         }
         pastFirst++;
 
         if (currentMoves.length >= minMoves.length && minMoves.length > 0) {
-            return;
+            continue;
         }
         pastSecond++;
 
         for (const move of currentMoves) {
-            if (JSON.stringify(move) == JSON.stringify(current)) {
-                return;
+            if (JSON.stringify(move) == JSON.stringify(currentCoords)) {
+                continue;
             }
         }
         pastThird++;
         
         
-        currentMoves.push(current);
+        currentMoves.push(currentCoords);
         
-        if (JSON.stringify(current) === JSON.stringify(target)) {
+        if (JSON.stringify(currentCoords) === JSON.stringify(target)) {
             // MAYBE RETURN MINMOVES & COMPARE topLeft, topRight, ETC.
             madeIt++;
             if (minMoves.length == 0 || currentMoves.length < minMoves.length) {
                 minMoves = currentMoves;
             }
-            return currentMoves;
+            continue;
         }
         pastFourth++;
-
+        // BREADTH FIRST
         console.log(current);
-        recursion(myBoard.getTopLeft(current), currentMoves);
-        if (JSON.stringify(current) == JSON.stringify(start)) {
-            debugger;
-            console.log(`Past getTopLeft: ${current}`);
-        }
-        recursion(myBoard.getTopRight(current), currentMoves);
+        queue.push([myBoard.getTopLeft(currentCoords), currentMoves]);
+        queue.push([myBoard.getTopRight(currentCoords), currentMoves]);
+        queue.push([myBoard.getMidTopLeft(currentCoords), currentMoves])
+        queue.push([myBoard.getMidTopRight(currentCoords), currentMoves]);
+        queue.push([myBoard.getMidBottomLeft(currentCoords), currentMoves]);
+        queue.push([myBoard.getMidBottomRight(currentCoords), currentMoves]);
+        queue.push([myBoard.getBottomLeft(currentCoords), currentMoves]);
+        queue.push([myBoard.getBottomRight(currentCoords), currentMoves]);
+        // recursion(myBoard.getTopLeft(current), currentMoves);
+        // if (JSON.stringify(current) == JSON.stringify(start)) {
+        //     debugger;
+        //     console.log(`Past getTopLeft: ${current}`);
+        // }
+        // recursion(myBoard.getTopRight(current), currentMoves);
 
-        recursion(myBoard.getMidTopLeft(current), currentMoves);
-        recursion(myBoard.getMidTopRight(current), currentMoves);
+        // recursion(myBoard.getMidTopLeft(current), currentMoves);
+        // recursion(myBoard.getMidTopRight(current), currentMoves);
 
-        recursion(myBoard.getMidBottomLeft(current), currentMoves);
-        recursion(myBoard.getMidBottomRight(current), currentMoves);
-        recursion(myBoard.getBottomLeft(current), currentMoves);
-        console.log("should be correct: ", current);
-        recursion(myBoard.getBottomRight(current), currentMoves);
+        // recursion(myBoard.getMidBottomLeft(current), currentMoves);
+        // recursion(myBoard.getMidBottomRight(current), currentMoves);
+        // debugger;
+        // recursion(myBoard.getBottomLeft(current), currentMoves);
+        // console.log("should be correct: ", current);
+        // recursion(myBoard.getBottomRight(current), currentMoves);
         // console.log(moves);
 
         // return bestMoves
 
-
     }
-    recursion(start);
     console.log({
         pastFirst,
         pastSecond,
