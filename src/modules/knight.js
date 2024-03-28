@@ -72,7 +72,7 @@ Knight.prototype.moveTo = function(start, target) {
     let pastThird = 0;
     let pastFourth = 0;
     let madeIt = 0;
-    let moves = [];
+    let minMoves = [];
     debugger;
 
     const recursion = function (current, currentMoves = []) {
@@ -84,7 +84,7 @@ Knight.prototype.moveTo = function(start, target) {
         }
         pastFirst++;
 
-        if (currentMoves.length >= moves.length && moves.length > 0) {
+        if (currentMoves.length >= minMoves.length && minMoves.length > 0) {
             return;
         }
         pastSecond++;
@@ -102,8 +102,8 @@ Knight.prototype.moveTo = function(start, target) {
         if (JSON.stringify(current) === JSON.stringify(target)) {
             // MAYBE RETURN MINMOVES & COMPARE topLeft, topRight, ETC.
             madeIt++;
-            if (moves.length == 0 || currentMoves.length < moves.length) {
-                moves = currentMoves;
+            if (moves.length == 0 || currentMoves.length < minMoves.length) {
+                minMoves = currentMoves;
             }
             return currentMoves;
         }
@@ -140,7 +140,7 @@ Knight.prototype.moveTo = function(start, target) {
         madeIt
     });
 
-    return moves;
+    return minMoves;
 }
 
 export default Knight;
