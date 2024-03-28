@@ -76,18 +76,12 @@ Knight.prototype.moveTo = function(start, target) {
     let queue = [];
     let i = 0;
     queue.push([start, []])
-    debugger;
     
     while (queue[i]) {
-        debugger;
-        // IS IN THE EXE CONTEXT OF MOVE
-        // console.log(myBoard.board);
         const current = Object.assign([], queue[i])
-        //set current to queue[i]
         const currentCoords = Object.assign([], current[0]);
         const currentMoves = Object.assign([], current[1]);
         
-        // do i++
 
         i++;
         if (currentMoves.length >= minMoves.length && minMoves.length > 0) {
@@ -117,7 +111,6 @@ Knight.prototype.moveTo = function(start, target) {
             continue;
         }
         pastFourth++;
-        // BREADTH FIRST
         queue.push([myBoard.getTopLeft(currentCoords), currentMoves]);
         queue.push([myBoard.getTopRight(currentCoords), currentMoves]);
         queue.push([myBoard.getMidTopLeft(currentCoords), currentMoves])
