@@ -74,26 +74,29 @@ Knight.prototype.moveTo = function(start, target) {
     let madeIt = 0;
     let minMoves = [];
     let queue = [];
+    let i = 0;
     queue.push([start, []])
     debugger;
 
     while (queue.length > 0) {
+        debugger;
         // IS IN THE EXE CONTEXT OF MOVE
         // console.log(myBoard.board);
         const current = queue[0];
         const currentCoords = current[0];
         let currentMoves = current[1];
-
-        queue.unshift();
-        const currentSquare = myBoard.getSquare(currentCoords)
-        if (currentSquare == null) {
+        
+        queue.shift();
+        if (currentMoves.length >= minMoves.length && minMoves.length > 0) {
             continue;
         }
         pastFirst++;
 
-        if (currentMoves.length >= minMoves.length && minMoves.length > 0) {
+        const currentSquare = myBoard.getSquare(currentCoords)
+        if (currentSquare == null) {
             continue;
         }
+
         pastSecond++;
 
         for (const move of currentMoves) {
