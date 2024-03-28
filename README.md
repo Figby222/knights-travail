@@ -1,2 +1,2 @@
-# webpack-template
-A repository template that uses NPM webpack along with other useful plugins to aid the coding process
+# Knights Travail
+Find the shortest possible path for a knight to get to a square in Chess
