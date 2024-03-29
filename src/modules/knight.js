@@ -67,11 +67,6 @@ Knight.prototype.getBottomRight = function(coordinates) {
 
 Knight.prototype.moveTo = function(start, target) {
     const myBoard = new GameBoard();
-    let pastFirst = 0;
-    let pastSecond = 0;
-    let pastThird = 0;
-    let pastFourth = 0;
-    let madeIt = 0;
     let minMoves = [];
     let queue = [];
     let i = 0;
@@ -86,31 +81,25 @@ Knight.prototype.moveTo = function(start, target) {
         i++;
         if (currentMoves.length >= minMoves.length && minMoves.length > 0) {
             continue;
-        }
-        pastFirst++;
-        
+        }        
         const currentSquare = myBoard.getSquare(currentCoords)
         if (currentSquare == null) {
             continue;
         }
         
-        pastSecond++;
         for (const move of currentMoves) {
             if (JSON.stringify(move) == JSON.stringify(currentCoords)) {
                 continue;
             }
         }
-        pastThird++;
        currentMoves.push(currentCoords);
        
        if (JSON.stringify(currentCoords) === JSON.stringify(target)) {
-           madeIt++;
            if (minMoves.length == 0 || currentMoves.length < minMoves.length) {
                minMoves = currentMoves;
             }
             continue;
         }
-        pastFourth++;
         queue.push([myBoard.getTopLeft(currentCoords), currentMoves]);
         queue.push([myBoard.getTopRight(currentCoords), currentMoves]);
         queue.push([myBoard.getMidTopLeft(currentCoords), currentMoves])
@@ -120,14 +109,6 @@ Knight.prototype.moveTo = function(start, target) {
         queue.push([myBoard.getBottomLeft(currentCoords), currentMoves]);
         queue.push([myBoard.getBottomRight(currentCoords), currentMoves]);
     }
-    console.log({
-        pastFirst,
-        pastSecond,
-        pastThird,
-        pastFourth,
-        madeIt,
-        queueLength: queue.length
-    });
 
     return minMoves;
 }
